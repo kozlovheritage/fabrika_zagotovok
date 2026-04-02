@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фабрика Заготовок | Кулинарный клуб Веры Малыгиной</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Century+Gothic:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #BBB897;
+            --accent-color: #ED8B9F;
+            --text-color: #5B5A5A;
+            --light-color: #F9F8F5;
+            --white-color: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --transition: all 0.4s ease;
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Century Gothic', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white-color);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.8rem;
+            font-weight: 400;
+        }
+        
+        ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        li {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-left: 35px;
+        }
+        
+        li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Шапка - исправленная с вертикальным центрированием */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: 70px; /* Фиксированная высота для центрирования */
+            display: flex;
+            align-items: center; /* Центрирование по вертикали */
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            backdrop-filter: blur(10px);
+            height: 60px; /* Уменьшаем высоту при прокрутке */
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%; /* Занимаем всю высоту шапки */
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center; /* Центрируем пункты меню по вертикали */
+            height: 100%; /* Занимаем всю высоту контейнера */
+        }
+        
+        .nav-menu li {
+            margin-bottom: 0;
+            padding-left: 0;
+            height: 100%; /* Высота как у родителя */
+            display: flex;
+            align-items: center; /* Центрируем текст по вертикали */
+        }
+        
+        .nav-menu li::before {
+            display: none;
+        }
+        
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0 20px;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+            height: 100%; /* Высота как у родителя */
+            display: flex;
+            align-items: center; /* Центрируем текст по вертикали */
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Блок 2: Знакомство */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 120px;
+            background-color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-color: rgba(187, 184, 151, 0.05);
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        .hero-image {
+            flex: 1;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeInRight 1s ease-out;
+            position: relative;
+        }
+        
+        .hero-video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+        }
+        
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(187, 184, 151, 0.2), rgba(237, 139, 159, 0.1));
+            border-radius: var(--border-radius);
+            z-index: 1;
+        }
+        
+        /* Блок 3: Как работают заготовки - исправленный (выровненные заголовки) */
+        .how-it-works {
+            background-color: var(--white-color);
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            align-self: center;
+        }
+        
+        .step-arrow {
+            position: absolute;
+            right: -40px;
+            top: 100px; /* Центрируем стрелку по вертикали относительно контента */
+            font-size: 2rem;
+            color: var(--accent-color);
+            animation: pulse 2s infinite;
+        }
+        
+        .step-img {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .step:hover .step-img {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            min-height: 60px; /* Фиксированная высота для выравнивания */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step-description {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            flex-grow: 1; /* Растягиваем описание для выравнивания высоты */
+        }
+        
+        /* Блок 4: Благодаря системному подходу - исправленный */
+        .benefits {
+            background-color: var(--light-color);
+        }
+        
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .benefit-card {
+            background-color: var(--white-color);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 5px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-top-color: var(--accent-color);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            flex-grow: 1; /* Растягиваем текст для выравнивания высоты */
+        }
+        
+        /* Блок 5: В клубе вас ждет - исправленный (уменьшенный текст) */
+        .club-features {
+            background-color: var(--white-color);
+        }
+        
+        .features-slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .features-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 30px;
+        }
+        
+        .feature-slide {
+            min-width: 300px;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-slide h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-slide p {
+            font-size: 1.05rem; /* Уменьшенный текст в карточках */
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .feature-slide ul {
+            margin-bottom: 0;
+        }
+        
+        .feature-slide li {
+            font-size: 1.05rem; /* Уменьшенный текст в списках */
+            margin-bottom: 10px;
+            padding-left: 25px;
+        }
+        
+        .feature-slide li::before {
+            font-size: 1.2rem;
+            top: -1px;
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-btn:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        /* Блок 6: Если вы */
+        .if-you {
+            background-color: var(--light-color);
+            text-align: center;
+        }
+        
+        .if-you-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .if-you-list {
+            text-align: left;
+            margin: 40px auto;
+            max-width: 600px;
+        }
+        
+        /* Блок 7: Тарифы - ОБНОВЛЕННЫЙ */
+        .pricing {
+            background-color: var(--white-color);
+        }
+        
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.popular {
+            border: 3px solid var(--accent-color);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-15px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        /* Стили для отображения цен с зачёркнутой старой ценой */
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .price .old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .price-period {
+            font-size: 1rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        .pricing-features {
+            margin: 30px 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+        
+        .pricing-features li {
+            padding-left: 0;
+            margin-bottom: 15px;
+            padding-left: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .pricing-features li::before {
+            display: none;
+        }
+        
+        .pricing-features li strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        /* Стили для зачёркнутого текста в тарифах */
+        .pricing-features li[style*="line-through"] {
+            opacity: 0.7;
+            position: relative;
+        }
+        
+        .pricing-features li[style*="line-through"] strong {
+            color: #999;
+            font-weight: 600;
+        }
+        
+        /* Подсветка преимуществ расширенного тарифа */
+        .pricing-card.popular .pricing-features li {
+            position: relative;
+        }
+        
+        .pricing-card.popular .pricing-features li strong {
+            color: var(--text-color);
+        }
+        
+        /* Кнопки в тарифах выровнены по нижнему краю */
+        .pricing-card .btn {
+            margin-top: auto;
+            align-self: center;
+            width: 80%;
+            text-align: center;
+        }
+        
+        /* Адаптивность для цен */
+        @media (max-width: 768px) {
+            .price {
+                font-size: 2.5rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .price .old-price {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Блок 8: Точка Б автора */
+        .author-point {
+            background-color: var(--light-color);
+            text-align: center;
+        }
+        
+        .author-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .author-img {
+            width: 100%;
+            height: 200px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .author-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Блок 9: Результаты и отзывы */
+        .testimonials {
+            background-color: var(--white-color);
+        }
+        
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+        
+        .testimonial-role {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+        }
+        
+        /* Блок 10: FAQ */
+        .faq {
+            background-color: var(--light-color);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background-color: var(--white-color);
+        }
+        
+        .faq-question {
+            padding: 20px 30px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .faq-question.active::after {
+            content: '-';
+        }
+        
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 20px 30px;
+            max-height: 1000px;
+        }
+        
+        /* Блок 11: Подвал */
+        footer {
+            background-color: #2A2A2A;
+            color: #CCCCCC;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-links {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            color: var(--white-color);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-column ul {
+            margin-bottom: 0;
+        }
+        
+        .footer-column ul li {
+            padding-left: 0;
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li::before {
+            display: none;
+        }
+        
+        .footer-column a {
+            color: #AAAAAA;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            
+            .step-arrow {
+                display: none;
+            }
+            
+            .benefits-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .author-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px; /* Учитываем высоту шапки */
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--white-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 12px 0;
+                height: auto; /* Сбрасываем высоту для мобильного меню */
+            }
+            
+            .nav-menu a {
+                margin: 0;
+                font-size: 1.3rem;
+                height: auto; /* Сбрасываем высоту для мобильного меню */
+                padding: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .hero::before {
+                display: none;
+            }
+            
+            .hero-content, 
+            .hero-image {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .benefits-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-container {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-15px);
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-column {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding-top: 110px;
+            }
+            
+            .author-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-title {
+                min-height: auto;
+            }
+            
+            header, header.scrolled {
+                height: 60px; /* Уменьшаем высоту шапки на мобильных */
+            }
+            
+            .nav-menu {
+                top: 60px; /* Учитываем новую высоту шапки */
+                height: calc(100vh - 60px);
+            }
+            
+            .pricing-features li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка (Блок 1) -->
+    <header id="header">
+        <div class="container header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero">О клубе</a></li>
+                <li><a href="#how-it-works">Как работает</a></li>
+                <li><a href="#benefits">Преимущества</a></li>
+                <li><a href="#club-features">Программа</a></li>
+                <li><a href="#pricing">Тарифы</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Блок 2: Знакомство -->
+    <section class="hero" id="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Клуб <span style="color: var(--accent-color);">Фабрика заготовок</span></h1>
+                <p>Целая СИСТЕМА по упрощению и оптимизации быта, которая помогает:</p>
+                <ul>
+                    <li>Экономить до 10 часов в неделю.</li>
+                    <li>Делать грамотные закупки, готовить безотходно и экономить до 40% бюджета на продукты.</li>
+                    <li>Всегда иметь под рукой разнообразные и полезные блюда и минимизировать вредные перекусы и срывы.</li>
+                    <li>Легко контролировать калорийность, плавно снижать или поддерживать вес без стресса.</li>
+                </ul>
+                <p><strong>Вас ждет более 90 рецептов заготовок и 180+ вариантов их приготовления и использования!</strong></p>
+                
+                <a href="#pricing" class="btn animate-on-scroll">Получить доступ к клубу</a>
+            </div>
+            
+            <div class="hero-image">
+                <div class="play-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Вера Малыгина готовит" class="hero-video">
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 3: Как работают заготовки - обновленный -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>Как работают заготовки на самом деле?</h2>
+            </div>
+            
+            <div class="steps-container">
+                <!-- Шаг 1 -->
+                <div class="step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Список покупок" class="step-img">
+                    <div class="step-title">Планирование покупок</div>
+                    <div class="step-description">
+                        Готовый список покупок исключает спонтанность и помогает купить то, что нужно для плана
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                
+                <!-- Шаг 2 -->
+                <div class="step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Приготовление заготовок" class="step-img">
+                    <div class="step-title">Приготовление</div>
+                    <div class="step-description">
+                        Вы превращаете продукты в набор разнообразных полуфабрикатов, которые любите вы и ваша семья
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                
+                <!-- Шаг 3 -->
+                <div class="step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Заготовки" class="step-img">
+                    <div class="step-title">Заготовки</div>
+                    <div class="step-description">
+                        Вы упаковываете, замораживаете и храните заготовки с учетом всех норм, чтобы сохранить максимум вкуса и пользы продуктов
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                
+                <!-- Шаг 4 -->
+                <div class="step animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Быстрая готовка" class="step-img">
+                    <div class="step-title">Быстрая готовка</div>
+                    <div class="step-description">
+                        Вы за считанные минуты, буквально по щелчку пальцев, собираете блюда из заготовок
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 4: Благодаря системному подходу - исправленный -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Благодаря системному подходу<br>в заготовках ВЫ СМОЖЕТЕ</h2>
+            </div>
+            
+            <div class="benefits-container">
+                <!-- Преимущество 1 -->
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Экономить до 10 часов в неделю!</h3>
+                    <p>Просто оптимизируя бытовые процессы! Вы особенно оцените это моменты пиковой нагрузки — например, поздним вечером после работы, — у вас уже будет готовый полезный ужин.</p>
+                </div>
+                
+                <!-- Преимущество 2 -->
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Заняться питанием без ограничений</h3>
+                    <p>Вы сможете создать свою систему питания, где еда будет работать «на вас», меню будет разнообразным, а рацион более сбалансированным</p>
+                </div>
+                
+                <!-- Преимущество 3 -->
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>Экономия</h3>
+                    <p>Рационально расходовать средства с помощью грамотных закупок и безотходной готовке. С помощью этой системы я сэкономила нашей семье более 200 тысяч за год, без экономии на качестве!</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#club-features" class="btn">Изучить тарифы клуба</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 5: В клубе вас ждет - исправленный -->
+    <section class="club-features" id="club-features">
+        <div class="container">
+            <div class="section-title">
+                <h2>В клубе вас ждёт</h2>
+                <p>8 блоков, 6 разделов с рецептами: более 90 рецептов заготовок и 180+ вариаций их приготовления!</p>
+            </div>
+            
+            <div class="features-slider-container">
+                <div class="features-slider" id="featuresSlider">
+                    <!-- Слайд 1 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">1</span>
+                        <h3>Ревизия и наведение порядка</h3>
+                        <p>Советы по наведению порядка на кухне, по экономии средств, благодаря "забытым" продуктам, а также лайфхаки по планированию меню и рациона, благодаря которым я поддерживаю форму уже более 6 лет, после похудения на 13 кг</p>
+                        <ul>
+                            <li>Избавиться от ненужных продуктов</li>
+                            <li>Закупаться в магазине один раз</li>
+                            <li>Всегда знать, что вам поесть дома</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 2 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">2</span>
+                        <h3>Основные правила заготовок</h3>
+                        <p>Вся вводная и необходимая информация, которая закроет вопросы по заготовкам: о заморозке, разморозке и хранению!</p>
+                        <ul>
+                            <li>Разделять, какие продукты теряют вкус после разморозки</li>
+                            <li>Замораживать без потери вкуса и качества</li>
+                            <li>Определять, какое блюдо можно заготовить впрок</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 3 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">3</span>
+                        <h3>Организация пространства</h3>
+                        <p>Советы по хранению заготовок и таре для них, все о вакуумации, подборка кухонной утвари с прямыми ссылками!</p>
+                        <ul>
+                            <li>Выбрать необходимую кухонную утварь</li>
+                            <li>Удобно и компактно хранить заготовки</li>
+                            <li>Оптимизировать пространство на кухне</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 4 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">4</span>
+                        <h3>О питании с нутрициологом</h3>
+                        <p>Материалы от сертифицированного специалиста о ЗДОРОВОМ подходе к питанию!</p>
+                        <ul>
+                            <li>Разобраться в основах здорового питания</li>
+                            <li>Узнать о методах снижения/набора веса</li>
+                            <li>Применять подсчет БЖУ и правило тарелки</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 5 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">5</span>
+                        <h3>Рецепты</h3>
+                        <p>РАЗДЕЛЫ: овощи, птица, мясо, рыба, творог, выпечка, паштеты. Более 90+ рецептов заготовок с видео-инструкциями и ПДФ конспектами.</p>
+                        <ul>
+                            <li>Не ломать голову «что приготовить?»</li>
+                            <li>Готовить 1 раз на 1-2 недели вперед</li>
+                            <li>Иметь разнообразное меню</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 6 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">6</span>
+                        <h3>СМАРТ ЗАГОТОВКИ</h3>
+                        <p>Наглядное соединение заготовок между собой для получения вкусных и интересных блюд. 27 полноценных рецептов из заготовок!</p>
+                        <ul>
+                            <li>Быстро готовить без времени и сил</li>
+                            <li>Экспериментировать с сочетаниями</li>
+                            <li>Создавать комплексные блюда</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 7 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">7</span>
+                        <h3>Конструктор</h3>
+                        <p>Заготавливаем одну основу, а начинка, подача и применение может быть разным!</p>
+                        <ul>
+                            <li>ПП пиццы и 19 вариаций начинок</li>
+                            <li>18 вариаций заготовок для напитков</li>
+                            <li>Куриные вафли и идеи по их подаче</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Слайд 8 -->
+                    <div class="feature-slide">
+                        <span class="feature-number">8</span>
+                        <h3>Для праздника</h3>
+                        <p>Больше не стоим у плиты в праздник по 5-10 часов, придумываем меню и заранее делаем то, что можем заготовить!</p>
+                        <ul>
+                            <li>23 рецепта для праздничного стола</li>
+                            <li>8 рецептов функциональных праздничных заготовок</li>
+                            <li>Подборка посуды и декора</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prevSlide">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn" id="nextSlide">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 6: Если вы -->
+    <section class="if-you" id="if-you">
+        <div class="container if-you-container">
+            <div class="section-title">
+                <h2>Если вы</h2>
+            </div>
+            
+            <div class="if-you-list">
+                <ul>
+                    <li>Устали ежедневно тратить время на готовку, мытье посуды и мучительные мысли «а что приготовить сегодня?»</li>
+                    <li>Хотите оптимизировать траты и сохранять бюджет на более важные покупки?</li>
+                    <li>Любите понятные и простые рецепты без сложных, экзотических ингредиентов?</li>
+                </ul>
+            </div>
+            
+            <p><strong>То мы ждём вас в клубе «Фабрика Заготовок»</strong></p>
+            <p>Начните следующую неделю по-новому — с готовым планом и свободными вечерами.</p>
+            
+            <a href="#pricing" class="btn" style="margin-top: 30px;">Выбрать тариф</a>
+        </div>
+    </section>
+
+    <!-- Блок 7: Тарифы - ОБНОВЛЕННЫЙ с новыми ценами -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Тарифы</h2>
+                <p>Выберите подходящий вариант участия в клубе</p>
+            </div>
+            
+            <div class="pricing-container">
+                <!-- Тариф 1: Базовый -->
+                <div class="pricing-card animate-on-scroll">
+                    <h3>Базовый</h3>
+                    <div class="price">
+                        <span class="old-price">3 890 ₽</span>
+                        3 690 ₽
+                    </div>
+                    <div class="price-period">единоразовый платеж</div>
+                    
+                    <div class="pricing-features">
+                        <ul>
+                            <li><strong>РЕВИЗИЯ И ПЛАН МЕНЮ</strong><br>
+                                — "Расхламление" кухни, наведение порядка в холодильнике и шкафчиках.<br>
+                                — Составление меню и планирование закупок по формуле.</li>
+                            
+                            <li><strong>ПРАВИЛА ЗАГОТОВОК</strong><br>
+                                — Какие продукты можно замораживать, а какие не рекомендуется.<br>
+                                — Как правильно замораживать и размораживать продукты без потери вкуса и качества.</li>
+                            
+                            <li><strong>ОРГАНИЗАЦИЯ ПРОСТРАНСТВА</strong><br>
+                                — Правила хранения заготовок.<br>
+                                — Вакуумная упаковка.<br>
+                                — Подборка необходимой кухонной утвари.</li>
+                            
+                            <li><strong>ПИТАНИЕ ОТ НУТРИЦИОЛОГА</strong><br>
+                                — Подкаст о питании, КБЖУ, похудении и пищевых ограничениях.<br>
+                                — Статья о подсчёте КБЖУ и о "правиле тарелки".</li>
+                            
+                            <li><strong>РЕЦЕПТЫ (6 разделов)</strong><br>
+                                — Овощи, птица, мясо, рыба, творог, паштеты.<br>
+                                — Видеорецепты и структурированные конспекты с рецептами, сроками хранения и КБЖУ на 100 г.<br>
+                                — Видео приготовления некоторых заготовок по разделам.</li>
+                            
+                            <li style="color: #888; text-decoration: line-through;"><strong>СМАРТ-ЗАГОТОВКИ</strong><br>
+                                — 27 рецептов приготовления заготовок.<br>
+                                — Видео и конспекты с этими рецептами.</li>
+                                
+                            <li style="color: #888; text-decoration: line-through;"><strong>КОНСТРУКТОР БЛЮД</strong><br>
+                                — ПП-пицца + 19 вариантов начинки.<br>
+                                — 18 вариантов заготовок для смузи, напитков и чаёв.<br>
+                                — Куриные вафли и идеи их применения.</li>
+                                
+                            <li style="color: #888; text-decoration: line-through;"><strong>ДЛЯ ПРАЗДНИКА</strong><br>
+                                — 3 раздела: салаты и закуски, горячее, десерты. Всего 24 рецепта.<br>
+                                — 8 рецептов функциональных праздничных заготовок.<br>
+                                — Подборка красивой и недорогой посуды и декора для стола.</li>
+                                
+                            <li style="color: #888; text-decoration: line-through;"><strong>ЧАТ ДЛЯ ОБЩЕНИЯ</strong><br>
+                                — Закрытое сообщество для общения, обмена опытом и консультаций.</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="#" class="btn">Выбрать тариф</a>
+                </div>
+                
+                <!-- Тариф 2: Расширенный -->
+                <div class="pricing-card popular animate-on-scroll">
+                    <div class="popular-badge">Популярный</div>
+                    <h3>Расширенный</h3>
+                    <div class="price">
+                        <span class="old-price">4 990 ₽</span>
+                        4 790 ₽
+                    </div>
+                    <div class="price-period">единоразовый платеж</div>
+                    
+                    <div class="pricing-features">
+                        <ul>
+                            <li><strong>РЕВИЗИЯ И ПЛАН МЕНЮ</strong><br>
+                                — "Расхламление" кухни, наведение порядка в холодильнике и шкафчиках.<br>
+                                — Составление меню и планирование закупок по формуле.</li>
+                            
+                            <li><strong>ПРАВИЛА ЗАГОТОВОК</strong><br>
+                                — Какие продукты можно замораживать, а какие не рекомендуется.<br>
+                                — Как правильно замораживать и размораживать продукты без потери вкуса и качества.</li>
+                            
+                            <li><strong>ОРГАНИЗАЦИЯ ПРОСТРАНСТВА</strong><br>
+                                — Правила хранения заготовок.<br>
+                                — Вакуумная упаковка.<br>
+                                — Подборка необходимой кухонной утвари.</li>
+                            
+                            <li><strong>ПИТАНИЕ ОТ НУТРИЦИОЛОГА</strong><br>
+                                — Подкаст о питании, КБЖУ, похудении и пищевых ограничениях.<br>
+                                — Статья о подсчёте КБЖУ и о "правиле тарелки".</li>
+                            
+                            <li><strong>РЕЦЕПТЫ (7 разделов)</strong><br>
+                                — Овощи, птица, мясо, рыба, творог, паштеты, <strong>выпечка</strong>.<br>
+                                — Видеорецепты и структурированные конспекты с рецептами, сроками хранения и КБЖУ на 100 г.<br>
+                                — Видео приготовления некоторых заготовок по разделам.</li>
+                            
+                            <li><strong>СМАРТ-ЗАГОТОВКИ</strong><br>
+                                — 27 рецептов приготовления заготовок.<br>
+                                — Видео и конспекты с этими рецептами.</li>
+                                
+                            <li><strong>КОНСТРУКТОР БЛЮД</strong><br>
+                                — ПП-пицца + 19 вариантов начинки.<br>
+                                — 18 вариантов заготовок для смузи, напитков и чаёв.<br>
+                                — Куриные вафли и идеи их применения.</li>
+                                
+                            <li><strong>ДЛЯ ПРАЗДНИКА</strong><br>
+                                — 3 раздела: салаты и закуски, горячее, десерты. Всего 24 рецепта.<br>
+                                — 8 рецептов функциональных праздничных заготовок.<br>
+                                — Подборка красивой и недорогой посуды и декора для стола.</li>
+                                
+                            <li><strong>ЧАТ ДЛЯ ОБЩЕНИЯ</strong><br>
+                                — Закрытое сообщество для общения, обмена опытом и консультаций.</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="#" class="btn">Выбрать тариф</a>
+                </div>
+            </div>
+            
+            <!-- Пояснение по тарифам -->
+            <div style="margin-top: 50px; padding: 25px; background-color: #FFF8F8; border-radius: 12px; border-left: 5px solid var(--accent-color);">
+                <h3 style="color: var(--text-color); margin-bottom: 15px; text-align: center;">💡 Как выбрать тариф?</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 0; text-align: center;">
+                    <strong>Базовый</strong> — если вы хотите освоить систему заготовок и получить проверенные рецепты<br>
+                    <strong>Расширенный</strong> — если вам важны разнообразие (выпечка, праздничные блюда) и поддержка в закрытом чате
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 8: Точка Б автора -->
+    <section class="author-point">
+        <div class="container">
+            <div class="section-title">
+                <h2>Точка "Б" автора</h2>
+                <p>В основе клуба я заложила свой опыт, каждое из этих блюд я приготовила по системе заготовок</p>
+            </div>
+            
+            <div class="author-gallery">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Блюдо 1" class="author-img animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Блюдо 2" class="author-img animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Блюдо 3" class="author-img animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Блюдо 4" class="author-img animate-on-scroll">
+            </div>
+            
+            <p style="text-align: center; margin-top: 40px; font-size: 1.3rem; font-weight: 600;">
+                Картинки блюд, праздничного стола — все рецепты ждут вас в клубе!
+            </p>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#pricing" class="btn">Получить доступ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 9: Результаты и отзывы -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Результаты и отзывы участниц</h2>
+                <p>В клубе уже более 3.000 участниц! Кто-то новичок в готовке, кто-то в заготовках, а кто-то продвинутый пользователь, но хочет сделать из хаотичных действий систему!</p>
+            </div>
+            
+            <div class="testimonials-container">
+                <!-- Отзыв 1 -->
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Участница" class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">Анна, 32 года</div>
+                            <div class="testimonial-role">Участница 6 месяцев</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        Благодаря клубу я смогла наконец-то систематизировать свой быт. Раньше готовка занимала все свободное время, теперь у меня есть вечера для себя и семьи. Экономлю около 8 тысяч рублей в месяц на продуктах!
+                    </div>
+                </div>
+                
+                <!-- Отзыв 2 -->
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Участница" class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">Екатерина, 28 лет</div>
+                            <div class="testimonial-role">Участница 4 месяца</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        Как мама двоих детей, я всегда не успевала готовить. Теперь у меня всегда есть полезная еда в морозилке. Дети довольны разнообразием, а я - свободным временем. Спасибо Вере за такую систему!
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p><strong>Цель клуба — не научить вас жить! А показать, какой удобным и легким может стать ваш быт! Помочь вам найти время на себя с заботой о здоровье и помочь сохранить ваши средства на что-то нужное и приятное 🌴</strong></p>
+                <a href="#pricing" class="btn" style="margin-top: 30px;">Присоединиться к клубу</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 10: FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Часто задаваемые вопросы</h2>
+            </div>
+            
+            <div class="faq-container">
+                <!-- Вопрос 1 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Я новичок в готовке/заготовках, подойдет ли мне клуб?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да! В клубе есть все материалы по организации пространства на кухне, про хранение и фасовку заготовок, что и в чем хранить, как выбрать вакууматор и чем его заменить. А также база из 90+ пошаговых рецептов с видео, без сложных ингредиентов!</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 2 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Я слежу за питанием/хочу прийти в форму, мне подойдет клуб?
+                    </div>
+                    <div class="faq-answer">
+                        <p>100% да! Но никаких запретов, пищевая пирамида клуба разнообразна (готовим даже выпечку), но ~90% рецептов сбалансированы и подходят на ПП 👌🏻 К каждому рецепту заготовки посчитаны КБЖУ и есть материалы по питанию от сертифицированного нутрициолога!</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 3 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Сколько будет доступ к материалам клуба?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Без ограничений, навсегда! 😍 Никаких дополнительных подписок и продлений 🤗</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 4 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Подойдет ли мне клуб, если у меня нет множества кухонной техники?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да! Вам потребуется только самый базовый инвентарь: духовка, блендер, сковородка, скалка и тд.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 5 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Можно ли оплатить частями?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, от 380 рублей/мес, без переплат %! Для этого выберете способ оплаты «Долями» или «Яндекс Сплит» 🤗</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 6 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Можно ли повысить тариф до расширенного?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, для этого напишите в службу заботы и вам помогут.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 7 -->
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        📌 Можно ли оплатить зарубежной картой?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, для оплаты зарубежными картами используйте сервисы международных платежей. Подробности уточняйте в службе поддержки.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p><strong>Клуб — это система заготовок по упрощению быта и процесса питания, это БАЗА из которой вы сделаете свой личный островок безопасности в быту, взяв полюбившиеся рецепты, придумывая свои альтернативы и экспериментируя с подачей заготовок к столу!</strong></p>
+                <a href="#pricing" class="btn" style="margin-top: 30px;">Выбрать тариф по душе</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал (Блок 11) -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Информация</h3>
+                        <ul>
+                            <li><a href="#">ИП Малыгина В.А.</a></li>
+                            <li><a href="#">Реквизиты</a></li>
+                            <li><a href="#">Оферта</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Документы</h3>
+                        <ul>
+                            <li><a href="#">Согласие на рассылку</a></li>
+                            <li><a href="#">Согласие на обработку персональных данных</a></li>
+                            <li><a href="#">Политика обработки персональных данных</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Контакты</h3>
+                        <ul>
+                            <li><a href="mailto:vera@fabrika-zagotovok.ru">vera@fabrika-zagotovok.ru</a></li>
+                            <li>
+                                <div class="social-links" style="justify-content: flex-start;">
+                                    <a href="#" class="social-link" aria-label="Телеграм" style="background-color: transparent; color: #AAAAAA; box-shadow: none;">
+                                        <i class="fab fa-telegram"></i>
+                                    </a>
+                                    <a href="#" class="social-link" aria-label="ВКонтакте" style="background-color: transparent; color: #AAAAAA; box-shadow: none;">
+                                        <i class="fab fa-vk"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Фабрика Заготовок. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Изменение шапки при прокрутке
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Анимация элементов при прокрутке
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.animate-on-scroll');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Запуск анимации при загрузке и прокрутке
+            window.addEventListener('load', animateOnScroll);
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Слайдер блоков клуба
+            const featuresSlider = document.getElementById('featuresSlider');
+            const prevSlideBtn = document.getElementById('prevSlide');
+            const nextSlideBtn = document.getElementById('nextSlide');
+            let currentSlide = 0;
+            const slideWidth = 330; // 300px + 30px gap
+            const totalSlides = 8;
+            
+            nextSlideBtn.addEventListener('click', function() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    featuresSlider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                }
+            });
+            
+            prevSlideBtn.addEventListener('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    featuresSlider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                }
+            });
+            
+            // Аккордеон FAQ
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isActive = this.classList.contains('active');
+                    
+                    // Закрываем все остальные
+                    document.querySelectorAll('.faq-question').forEach(q => {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('active');
+                    });
+                    
+                    // Открываем текущий, если он был закрыт
+                    if (!isActive) {
+                        this.classList.add('active');
+                        answer.classList.add('active');
+                    }
+                });
+            });
+            
+            // Плавная прокрутка
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 60,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Предзагрузка изображений
+            const preloadImages = function() {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    const src = img.getAttribute('src');
+                    if (src) {
+                        const image = new Image();
+                        image.src = src;
+                    }
+                });
+            };
+            
+            window.addEventListener('load', preloadImages);
+            
+            // Анимация "плавающих" элементов
+            const floatElements = document.querySelectorAll('.hero-video, .benefit-card, .pricing-card');
+            
+            floatElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
