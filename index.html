@@ -278,18 +278,20 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
   .content-cards{grid-template-columns:1fr}
   .rev-nav{gap:12px}
   .rev-btn{width:40px;height:40px;font-size:1.2rem}
-  /* ИСПРАВЛЕНИЕ: увеличиваем расстояние между кнопками героя на мобилках */
-  .hero-actions{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 24px;
-    margin-bottom: 20px;
+  /* ИСПРАВЛЕНИЕ: гарантируем вертикальное расположение кнопок и отступ */
+  .hero .hero-actions{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 24px !important;
+    margin-bottom: 24px !important;
   }
-  .hero-actions .btn{
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    padding: 14px 20px;
+  .hero .hero-actions .btn{
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 14px 20px !important;
+    box-sizing: border-box;
   }
 }
 @media (max-width:576px){
@@ -328,7 +330,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <h1 class="hero-title reveal reveal-delay-1">Клуб <span>Фабрика заготовок</span></h1>
 <p class="hero-sub reveal reveal-delay-1">Фабрика заготовок — кулинарный клуб конструктор, который поможет вам экономить время и деньги, но при этом — питаться сбалансированно и разнообразно!</p>
 <div class="hero-highlight reveal reveal-delay-2" style="margin-top:20px">
-Занимайте место в предзаписи и вступайте на 3 поток клуба первыми по самым выгодным условиям!
+Занимайте место в предзаписи, чтобы вступить на 3 поток клуба первыми и по самым выгодным условиям!
 </div>
 <div class="hero-actions reveal reveal-delay-3">
 <a href="#" class="btn open-waitlist">Заполнить предзапись</a>
