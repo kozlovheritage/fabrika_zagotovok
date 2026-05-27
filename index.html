@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Фабрика Заготовок | Кулинарный клуб конструктор</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ---------- Базовые стили ---------- */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+}
+:root{
+  --cream:#F5EFE6;--warm-white:#FBF8F2;--pink:#D4768A;
+  --pink-light:#EDCAD2;--pink-dark:#B85A6D;--yellow:#EDE8A8;
+  --text:#5B5A5A;--text-mid:#5C4F47;--text-light:#8C7D74;
+  --border:rgba(44,36,32,0.08);
+  --shadow:0 4px 32px rgba(44,36,32,0.08);
+  --shadow-lg:0 16px 64px rgba(44,36,32,0.14);
+  --r:20px;--r-sm:12px;--transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+*,::after,::before{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','Century Gothic',CenturyGothic,'AppleGothic',Helvetica,Arial,sans-serif;
+  background:var(--cream);color:var(--text);overflow-x:hidden;line-height:1.4;
+}
+.container{max-width:1180px;margin:0 auto;padding:0 28px}
+h1{font-family:'Inter','Century Gothic',sans-serif;font-size:clamp(2.6rem,5vw,4.5rem);font-weight:700;line-height:.9}
+h2{font-family:'Inter','Century Gothic',sans-serif;font-size:clamp(1.8rem,3.2vw,2.8rem);font-weight:700;line-height:1}
+h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
+p{font-size:1rem;line-height:1.5;color:var(--text-mid);margin-bottom:1rem}
+.label{
+  display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:1.4rem;
+  background:rgba(212,118,138,.12);color:var(--pink) !important;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 36px;border-radius:50px;font-family:inherit;font-size:1rem;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;transition:var(--transition);
+  background:var(--pink) !important;color:#fdf3f3 !important;box-shadow:0 8px 32px rgba(212,118,138,.35);
+}
+.btn:hover{background:var(--pink-dark) !important;transform:translateY(-3px)}
+.btn-ghost{background:transparent !important;color:var(--pink) !important;border:2px solid var(--pink) !important;box-shadow:none}
+.btn-ghost:hover{background:var(--pink) !important;color:#fdf3f3 !important}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+/* ---------- Шапка ---------- */
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:14px 0;background:rgba(245,239,230,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;min-height:56px}
+.logo{font-family:'Century Gothic',CenturyGothic,AppleGothic,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:1.3rem;font-weight:600;color:var(--text) !important;text-decoration:none}
+.logo span{color:var(--pink) !important}
+nav ul{display:flex;list-style:none;gap:2px;align-items:center}
+nav ul li a{color:var(--text-mid) !important;text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 13px;border-radius:50px}
+nav ul li a:hover{color:var(--pink) !important;background:rgba(212,118,138,.08)}
+nav ul li .btn{padding:8px 20px;font-size:.85rem}
+.mobile-btn{display:none;background:0 0;border:none;font-size:1.4rem;color:var(--text);cursor:pointer}
+
+/* ---------- Hero ---------- */
+.hero{padding-top:130px;padding-bottom:100px;background:var(--cream);position:relative;overflow:hidden;min-height:90vh;display:flex;align-items:center}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+.hero-inner{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr 440px;gap:80px;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mid);margin-bottom:1.4rem}
+.hero-eyebrow::before{content:'';width:32px;height:2px;background:var(--pink);border-radius:2px}
+.hero-title{margin-bottom:0.5rem}
+.hero-title span{color:var(--pink) !important}
+.hero-sub{font-size:1.1rem;color:var(--text-mid);line-height:1.5;margin-bottom:1.8rem;margin-top:0.5rem}
+.hero-highlight{background:var(--warm-white);border-radius:var(--r-sm);padding:16px 20px;margin-bottom:1.8rem;border:1px solid var(--border);font-weight:600}
+.hero-highlight span{color:var(--pink) !important}
+.hero-photo-col{position:relative}
+.hero-photo-frame{border-radius:32px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero-photo-frame img{width:100%;height:auto;display:block}
+.hero-badge{position:absolute;bottom:-16px;left:-16px;background:var(--warm-white);border-radius:18px;padding:14px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;z-index:2}
+.hero-badge .b-icon{width:44px;height:44px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.hero-badge .b-text strong{display:block;font-size:.95rem;color:var(--pink) !important}
+.hero-tag{position:absolute;top:20px;right:-16px;background:var(--pink) !important;color:#fdf3f3 !important;border-radius:50px;padding:9px 18px;font-size:.78rem;font-weight:700;box-shadow:0 8px 24px rgba(212,118,138,.4);white-space:nowrap}
+
+/* ---------- Карточки результатов (шахматный порядок 3+2) ---------- */
+.benefits-grid-5{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  margin-top:56px;
+}
+.benefit-card-new{
+  padding:30px 24px;
+  border-radius:var(--r);
+  background:var(--warm-white);
+  border:1px solid var(--border);
+  transition:var(--transition);
+}
+.benefit-card-new:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.benefit-icon-new{width:70px;height:70px;border-radius:20px;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.2rem}
+/* ШАХМАТНЫЙ ПОРЯДОК: первые три в первом ряду, четвёртый и пятый — во втором ряду, выровнены по центру */
+.benefits-grid-5 .benefit-card-new:nth-child(4){
+  grid-column: 2 / 3;
+}
+.benefits-grid-5 .benefit-card-new:nth-child(5){
+  grid-column: 3 / 4;
+}
+@media (max-width:768px){
+  .benefits-grid-5{
+    grid-template-columns:1fr;
+  }
+  .benefits-grid-5 .benefit-card-new:nth-child(4),
+  .benefits-grid-5 .benefit-card-new:nth-child(5){
+    grid-column: auto;
+  }
+}
+
+/* Наполнение клуба */
+.content-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:40px 0}
+.content-card{background:var(--warm-white);border-radius:var(--r);padding:32px 28px;text-align:center;border:1px solid var(--border);transition:var(--transition)}
+.content-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.content-icon{font-size:2.5rem;margin-bottom:1rem}
+.content-card h3{font-size:1.2rem;margin-bottom:.8rem}
+.content-card p{font-size:.88rem;color:var(--text-mid);margin-bottom:0}
+@media (max-width:768px){.content-cards{grid-template-columns:1fr}}
+
+/* ---------- Общие секции ---------- */
+.how-it-works,.benefits,.club-features,.reviews,.faq{
+  padding:80px 0;
+  clear:both;
+}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header h2{margin-bottom:1rem}
+.section-header p{font-size:1.05rem;color:var(--text-light);max-width:560px;margin:0 auto}
+.benefits-cta{text-align:center;margin-top:48px}
+.reviews-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.reviews-count{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text-light)}
+
+/* Список "О клубе" */
+.about-club-list{
+  list-style:none;
+  text-align:left;
+}
+.about-club-list li{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+  align-items:center;
+}
+.about-club-list li span:first-child{
+  flex-shrink:0;
+  font-size:1.3rem;
+}
+.about-club-list li span:last-child{
+  line-height:1.4;
+  text-align:left;
+  font-weight:600;
+}
+
+/* ---------- Слайдер отзывов (розовые, прозрачные стрелки) ---------- */
+.rev-track-wrap{position:relative}
+.rev-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 8px 28px 8px;scrollbar-width:none}
+.rev-track::-webkit-scrollbar{display:none}
+.rev-slide{flex-shrink:0;width:280px;scroll-snap-align:start;padding:4px}
+.rev-slide img{width:100%;height:auto;display:block;border-radius:var(--r-sm);border:1px solid var(--border);box-shadow:0 2px 16px rgba(44,36,32,.06)}
+.rev-slide:hover img{box-shadow:0 20px 60px rgba(44,36,32,.14);transform:translateY(-5px)}
+.rev-nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  margin-top:32px;
+}
+.rev-btn{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:transparent;
+  border:1px solid var(--pink);
+  color:var(--pink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:1.5rem;
+  font-weight:400;
+  transition:all 0.2s;
+  opacity:0.6;
+}
+.rev-btn:hover{
+  background:var(--pink);
+  color:#fff;
+  opacity:1;
+}
+.rev-dots{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.rev-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--border);
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.rev-dot.active{
+  background:var(--pink);
+  width:28px;
+  border-radius:12px;
+}
+
+/* ---------- FAQ ---------- */
+.faq-inner{max-width:760px;margin:0 auto}
+.faq-item{margin-bottom:12px;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--warm-white)}
+.faq-question{padding:20px 28px;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.faq-question:hover{color:var(--pink);background:rgba(212,118,138,.04)}
+.faq-question .faq-icon{width:28px;height:28px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.faq-question.active .faq-icon{background:var(--pink);color:#fdf3f3;transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.faq-answer.active{max-height:600px}
+.faq-answer-inner{padding:0 28px 20px}
+.faq-answer-inner p{font-size:.95rem;line-height:1.7;margin:0}
+.faq-answer-inner a{color:var(--pink) !important;text-decoration:underline}
+
+/* ---------- Футер ---------- */
+footer{background:#2c2420;padding:60px 0 30px;clear:both}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
+.foot-brand .logo{color:rgba(255,255,255,.9) !important;margin-bottom:.8rem;display:block}
+.foot-brand .logo span{color:var(--pink-light) !important}
+.foot-brand p{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.7}
+.foot-col h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-col ul{list-style:none}
+.foot-col ul li{margin-bottom:.7rem}
+.foot-col a{color:rgba(255,255,255,.55) !important;text-decoration:none;font-size:.9rem}
+.foot-col a:hover{color:var(--pink-light) !important}
+.foot-bottom{padding-top:20px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.foot-bottom p{font-size:.75rem;color:rgba(255,255,255,.3);margin:0}
+
+/* ---------- Модальное окно (лист ожидания) ---------- */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal-window{background:var(--warm-white);border-radius:var(--r);max-width:480px;width:90%;padding:32px 28px;text-align:center;box-shadow:var(--shadow-lg);position:relative;transform:scale(0.9);transition:transform .3s}
+.modal-overlay.active .modal-window{transform:scale(1)}
+.modal-window h3{font-size:1.8rem;color:var(--pink);margin-bottom:1rem}
+.close-modal{position:absolute;top:16px;right:20px;font-size:28px;cursor:pointer}
+.consent-item{display:flex;align-items:flex-start;gap:12px;margin:16px 0;text-align:left;font-size:.85rem}
+.consent-item input{margin-top:2px;width:18px;height:18px}
+.consent-item a{color:var(--pink);text-decoration:underline}
+.form-field{margin-bottom:16px;text-align:left}
+.form-field input{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:white;font-family:inherit}
+
+/* ---------- Адаптив ---------- */
+@media (max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:48px}
+  .hero-photo-col{max-width:480px;margin:0 auto}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  nav{display:none}
+  nav.open{display:block;position:fixed;top:62px;left:0;right:0;background:rgba(250,247,242,.97);backdrop-filter:blur(20px);padding:16px;z-index:999}
+  nav.open ul{flex-direction:column;gap:2px}
+  .mobile-btn{display:block}
+  .benefits-grid-5{grid-template-columns:1fr}
+  .benefits-grid-5 .benefit-card-new:nth-child(4),
+  .benefits-grid-5 .benefit-card-new:nth-child(5){
+    grid-column:auto;
+  }
+  .foot-grid{grid-template-columns:1fr}
+  .hero-photo-col{margin-bottom:2rem}
+  .content-cards{grid-template-columns:1fr}
+  .rev-nav{gap:12px}
+  .rev-btn{width:40px;height:40px;font-size:1.2rem}
+}
+@media (max-width:576px){
+  h1{font-size:2.2rem}
+  h2{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+<header id=hdr>
+<div class="container header-inner">
+<a href=#hero class=logo>Фабрика <span>Заготовок</span></a>
+<nav id=nav>
+<ul>
+<li><a href=#hero>О клубе</a></li>
+<li><a href=#about-club>Что это</a></li>
+<li><a href=#results>Результаты</a></li>
+<li><a href=#content>Наполнение</a></li>
+<li><a href=#reviews>Отзывы</a></li>
+<li><a href=#faq>FAQ</a></li>
+<li><a href="#" class="btn open-waitlist" style=margin-left:8px>Лист ожидания</a></li>
+</ul>
+</nav>
+<button class=mobile-btn id=mbtn aria-label=Меню>☰</button>
+</div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class=hero id=hero>
+<div class=hero-noise></div>
+<div class=container>
+<div class=hero-inner>
+<div class=hero-content>
+<div class="hero-eyebrow reveal">Кулинарный клуб Веры Малыгиной</div>
+<h1 class="hero-title reveal reveal-delay-1">Клуб <span>Фабрика заготовок</span></h1>
+<p class="hero-sub reveal reveal-delay-1">Фабрика заготовок — кулинарный клуб конструктор, который поможет вам экономить время и деньги, но при этом — питаться сбалансированно и разнообразно!</p>
+<div class="hero-highlight reveal reveal-delay-2" style="margin-top:20px">
+Занимайте место в предзаписи и вступайте на 3 поток клуба первыми по самым выгодным условиям!
+</div>
+<div class="hero-actions reveal reveal-delay-3">
+<a href="#" class="btn open-waitlist">Заполнить предзапись</a>
+<a href="#about-club" class="btn btn-ghost">Узнать больше</a>
+</div>
+</div>
+<div class="hero-photo-col reveal">
+<div class=hero-photo-frame><img src="https://i.ibb.co/gsgvLcv/i-1.png" alt="Вера Малыгина"></div>
+<div class=hero-badge><div class=b-icon>🏆</div><div class=b-text><strong>4 000 участниц</strong><span>в клубе «Фабрика заготовок»</span></div></div>
+<div class=hero-tag>с 2025 года</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Что такое Фабрика заготовок -->
+<section class="how-it-works" id="about-club">
+<div class="container">
+<div class="section-header reveal">
+<span class=label>О клубе</span>
+<h2>Что такое «Фабрика заготовок»?</h2>
+<p style="max-width:700px">это клуб, где есть всё о системе заготовок от А до Я:</p>
+</div>
+<div style="max-width:800px; margin:0 auto">
+<ul class="about-club-list">
+<li><span>✅</span> <span>Правила и лайфхаки по созданию заготовок и плана питания</span></li>
+<li><span>✅</span> <span>Более 300 рецептов на каждый день: заготовок и блюд из них!</span></li>
+<li><span>✅</span> <span>Подборки необходимой кухонной утвари с прямыми ссылками</span></li>
+<li><span>✅</span> <span>Материалы по здоровому питанию от нутрициолога</span></li>
+<li><span>✅</span> <span>Чат с участницами для обмена опытом</span></li>
+<li><span>🤫</span> <span>И многое НОВОЕ другое 🤫</span></li>
+</ul>
+<div class="benefits-cta" style="margin-top:30px"><a href="#" class="btn btn-primary open-waitlist">Заполняйте лист ожидания клуба, чтобы первыми получить ссылку на вступление!</a></div>
+</div>
+</div>
+</section>
+
+<!-- Результаты -->
+<section class="benefits" id="results">
+<div class="container">
+<div class="section-header reveal"><span class=label>Преимущества</span><h2>Результаты после вступления в клуб</h2></div>
+<div class="benefits-grid-5">
+<div class="benefit-card-new reveal"><div class="benefit-icon-new">⏰</div><h3>Экономия до 10 часов в неделю</h3><p>Вы сможете экономить 2-3 часа ЕЖЕДНЕВНО на закупке, готовке и уборке после! Благодаря системе заготовок приготовление блюд будет занимать по 10-20 минут!</p></div>
+<div class="benefit-card-new reveal"><div class="benefit-icon-new">💰</div><h3>Экономия до 40% бюджета в месяц</h3><p>С четким планом, грамотными закупками, безотходной готовкой, мы не тратим лишнего и не выбрасываем продукты! Более 200 тысяч за год сохранено в семейном бюджете.</p></div>
+<div class="benefit-card-new reveal"><div class="benefit-icon-new">🥗</div><h3>Разнообразный рацион</h3><p>Вы сможете соединять заготовки, как конструктор, получая разные блюда из похожих ингредиентов из вашей морозилки! Один набор заготовок, а блюда всегда разные</p></div>
+<div class="benefit-card-new reveal"><div class="benefit-icon-new">🌿</div><h3>Здоровое питание без ограничений и диет</h3><p>Вы начнете есть овощи, добирать белок и делать свою тарелку более полезной, а состав блюд чище! Система заготовок поможет добиться ваших целей в похудении или наборе веса.</p></div>
+<div class="benefit-card-new reveal"><div class="benefit-icon-new">🍲</div><h3>Быт без квеста «что приготовить?»</h3><p>В морозилке всегда есть заготовки, которые можно собрать за 5 минут по методу «конструктор» и получить сбалансированное блюдо.</p></div>
+</div>
+</div>
+</section>
+
+<!-- Наполнение клуба -->
+<section class="club-features" id="content">
+<div class="container">
+<div class="section-header reveal"><span class=label>Наполнение</span><h2>Что внутри клуба</h2></div>
+<div class="content-cards">
+<div class="content-card reveal"><div class="content-icon">📄</div><h3>Удобные PDF конспекты</h3><p>В каждом конспекте есть меню заготовок, список покупок, пошаговые рецепты, информация о заморозке/хранении/разморозке и по приготовлению заготовок! А также подсчитаны КБЖУ на 100 гр.</p></div>
+<div class="content-card reveal"><div class="content-icon">🎥</div><h3>Подробные видео-инструкции</h3><p>В видео показан не только процесс приготовления, но и оптимальный сценарий действий для экономии времени! Видео короткие, без воды.</p></div>
+<div class="content-card reveal"><div class="content-icon">📦</div><h3>Дополнительные полезные материалы</h3><p>Правила и лайфхаки заготовок, советы по составлению меню и продуктовой корзины, подборка инвентаря и многое другое!</p></div>
+</div>
+<div class="benefits-cta"><a href="#" class="btn open-waitlist">Оставить заявку на клуб</a></div>
+</div>
+</section>
+
+<!-- Отзывы -->
+<section class="reviews" id="reviews">
+<div class="container">
+<div class="reviews-head reveal"><div><h2 style=color:#d4768a>Что говорят участницы</h2></div><div class="reviews-count">Уже <strong>4 000+</strong> участниц 🔥</div></div>
+<div class="rev-track-wrap reveal"><div class="rev-track" id="revTrack">
+<div class="rev-slide"><img src="https://i.ibb.co/9HF4qhG4/1.jpg" alt="1"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/rfNyh2ff/2.jpg" alt="2"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/MxNbtTr1/3.jpg" alt="3"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/8n5KKG5d/4.jpg" alt="4"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/pj6bF3Qz/5.jpg" alt="5"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/sdfrT5QN/6.jpg" alt="6"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/6RTjBvrp/7.jpg" alt="7"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/HfDZrCdh/8.jpg" alt="8"></div>
+<div class="rev-slide"><img src="https://i.ibb.co/jv8Q6nWG/9.jpg" alt="9"></div>
+</div></div>
+<div class="rev-nav">
+<button class="rev-btn" id="revPrev">❮</button>
+<div class="rev-dots" id="revDots"></div>
+<button class="rev-btn" id="revNext">❯</button>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+<div class="container">
+<div class="section-header reveal"><span class=label>Вопросы</span><h2>Часто задаваемые вопросы</h2></div>
+<div class="faq-inner">
+<div class="faq-item reveal"><div class="faq-question" onclick="toggleFaq(this)">🤍 Насколько доступ к клубу?<span class=faq-icon>+</span></div><div class=faq-answer><div class=faq-answer-inner><p>Доступ к материалам клуба — навсегда</p></div></div></div>
+<div class="faq-item reveal"><div class="faq-question" onclick="toggleFaq(this)">🤍 Есть ли пополнения?<span class=faq-icon>+</span></div><div class=faq-answer><div class=faq-answer-inner><p>Нет, при вступлении в клуб все материалы доступны вам сразу</p></div></div></div>
+<div class="faq-item reveal"><div class="faq-question" onclick="toggleFaq(this)">🤍 Какая стоимость клуба?<span class=faq-icon>+</span></div><div class=faq-answer><div class=faq-answer-inner><p>Разная, зависит от тарифов. До 8 тысяч рублей за огромную базу. Для участников предзаписи будут специальные условия!</p></div></div></div>
+<div class="faq-item reveal"><div class="faq-question" onclick="toggleFaq(this)">🤍 Как можно будет оплатить?<span class=faq-icon>+</span></div><div class=faq-answer><div class=faq-answer-inner><p>Картой, с помощью СБП или беспроцентной рассрочки от банков-партнеров на 2-3-6-12 месяцев!</p></div></div></div>
+<div class="faq-item reveal"><div class="faq-question" onclick="toggleFaq(this)">🤍 Будет ли обратная связь?<span class=faq-icon>+</span></div><div class=faq-answer><div class=faq-answer-inner><p>Да, в клубе будут работать кураторы для вас! Об этом нововведении расскажем позже❤️</p></div></div></div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- Футер -->
+<footer>
+<div class=container>
+<div class=foot-grid>
+<div class=foot-brand><a href=#hero class=logo>Фабрика <span>Заготовок</span></a><p style=margin-top:.8rem>Кулинарный клуб Веры Малыгиной — система заготовок для удобного, вкусного и здорового питания.</p></div>
+<div class=foot-col><h4>Информация</h4><ul><li>ИП Малыгина Вера Николаевна</li><li><a href=https://disk.yandex.ru/i/sDY8_G_OsyiZ8g target=_blank>Реквизиты</a></li></ul></div>
+<div class=foot-col><h4>Документы</h4><ul><li><a href=https://disk.yandex.ru/i/TpVA_h_RWP1UyQ target=_blank>Согласие на рассылку</a></li><li><a href=https://disk.yandex.ru/i/3RzYTim7hZO0Nw target=_blank>Согласие на обработку ПД</a></li><li><a href=https://disk.yandex.ru/i/vIxEZ0HkXsj42Q target=_blank>Политика обработки ПД</a></li></ul></div>
+<div class=foot-col><h4>Контакты</h4><ul><li><a href=https://t.me/+ces7gQS4YXA0NmUy target=_blank>Telegram</a></li><li><a href=https://vk.ru/im/channels/-234363549 target=_blank>ВКонтакте</a></li><li><a href=https://max.ru/vera_mlgn_fabrika target=_blank>MAX</a></li><li><a href="https://dzen.ru/zagotovki_veramlgn?share_to=link" target=_blank>Яндекс Дзен</a></li><li>Служба заботы: zabotaveramlgn@yandex.ru</li></ul></div>
+</div>
+<div class=foot-bottom><p>© 2025 Фабрика Заготовок. Все права защищены.</p><div class=foot-social></div></div>
+</div>
+</footer>
+
+<!-- Модальное окно для предзаписи (лист ожидания) -->
+<div class="modal-overlay" id="waitlistModal">
+<div class="modal-window">
+<span class="close-modal close-waitlist">&times;</span>
+<h3>Лист ожидания</h3>
+<p>Заполните форму, чтобы первыми получить доступ к клубу по специальным условиям</p>
+<form id="waitlistForm">
+<div class="form-field"><label>Имя</label><input type="text" name="name" required placeholder="Ваше имя"></div>
+<div class="form-field"><label>Электронная почта</label><input type="email" name="email" required placeholder="email@example.com"></div>
+<div class="form-field"><label>Номер телефона</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__"></div>
+<div class="form-field"><label>Ник в Telegram</label><input type="text" name="telegram" placeholder="@username" required></div>
+<div class="consent-item"><input type="checkbox" id="consentPdWait" required><label for="consentPdWait">Даю <a href="https://disk.yandex.ru/i/3RzYTim7hZO0Nw" target="_blank">согласие</a> на обработку персональных данных в соответствии с <a href="https://disk.yandex.ru/i/vIxEZ0HkXsj42Q" target="_blank">политикой</a> обработки ПД</label></div>
+<div class="consent-item"><input type="checkbox" id="consentMailWait" required><label for="consentMailWait">Даю согласие на получение рассылки (<a href="https://disk.yandex.ru/i/TpVA_h_RWP1UyQ" target="_blank">согласие на рассылку</a>)</label></div>
+<div class="modal-buttons"><button type="submit" class="btn">Отправить заявку</button></div>
+</form>
+</div>
+</div>
+
+<script>
+// мобильное меню
+const mbtn=document.getElementById("mbtn"),nav=document.getElementById("nav");
+mbtn.addEventListener("click",()=>{nav.classList.toggle("open"),mbtn.textContent=nav.classList.contains("open")?"✕":"☰"});
+document.querySelectorAll("nav a").forEach(e=>e.addEventListener("click",()=>{nav.classList.remove("open"),mbtn.textContent="☰"}));
+
+// reveal
+const revealObserver=new IntersectionObserver(e=>e.forEach(e=>{e.isIntersecting&&(e.target.classList.add("visible"),revealObserver.unobserve(e.target))}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(e=>revealObserver.observe(e));
+
+// faq аккордеон
+function toggleFaq(el){const ans=el.parentElement.querySelector(".faq-answer"),active=el.classList.contains("active");document.querySelectorAll(".faq-question.active").forEach(q=>{q.classList.remove("active");q.parentElement.querySelector(".faq-answer").classList.remove("active");q.querySelector(".faq-icon").textContent="+"});if(!active){el.classList.add("active");ans.classList.add("active");el.querySelector(".faq-icon").textContent="−"}}
+
+// слайдер отзывов (динамический шаг)
+const track=document.getElementById("revTrack"),slides=track?track.querySelectorAll(".rev-slide"):[],dotsWrap=document.getElementById("revDots");let slideStep=0;
+function updateSlideStep(){if(!track||!slides.length)return;const first=slides[0],style=getComputedStyle(first),w=first.offsetWidth,gap=parseFloat(style.marginRight)||0;slideStep=(w+gap)*3}
+function initDots(){if(!dotsWrap)return;dotsWrap.innerHTML="";const groups=Math.ceil(slides.length/3);for(let i=0;i<groups;i++){const dot=document.createElement("div");dot.className="rev-dot"+(i===0?" active":"");dot.addEventListener("click",()=>{if(track&&slideStep)track.scrollTo({left:slideStep*i,behavior:"smooth"})});dotsWrap.appendChild(dot)}}
+function updateDots(){if(!track||!dotsWrap||!slideStep)return;const idx=Math.round(track.scrollLeft/slideStep);dotsWrap.querySelectorAll(".rev-dot").forEach((d,i)=>{d.classList.toggle("active",i===idx)})}
+if(track){updateSlideStep();initDots();track.addEventListener("scroll",updateDots,{passive:true});document.getElementById("revPrev")?.addEventListener("click",()=>{if(slideStep)track.scrollBy({left:-slideStep,behavior:"smooth"})});document.getElementById("revNext")?.addEventListener("click",()=>{if(slideStep)track.scrollBy({left:slideStep,behavior:"smooth"})});window.addEventListener("load",()=>{updateSlideStep();updateDots()})}
+
+// лист ожидания
+const waitlistModal=document.getElementById("waitlistModal"),openBtns=document.querySelectorAll(".open-waitlist"),closeWait=document.querySelector(".close-waitlist");
+openBtns.forEach(b=>b.addEventListener("click",e=>{e.preventDefault();waitlistModal.classList.add("active")}));
+closeWait?.addEventListener("click",()=>waitlistModal.classList.remove("active"));
+waitlistModal?.addEventListener("click",e=>{if(e.target===waitlistModal)waitlistModal.classList.remove("active")});
+document.getElementById("waitlistForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Спасибо! Ваша заявка принята. Мы свяжемся с вами.");e.target.reset();waitlistModal.classList.remove("active")});
+</script>
+</body>
+</html>
