@@ -471,22 +471,42 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 </div>
 </footer>
 
-<!-- Модальное окно для предзаписи (лист ожидания) -->
+<!-- Модальное окно для предзаписи (лист ожидания) с блокировкой кнопки -->
 <div class="modal-overlay" id="waitlistModal">
-<div class="modal-window">
-<span class="close-modal close-waitlist">&times;</span>
-<h3>Лист ожидания</h3>
-<p>Заполните форму, чтобы первыми получить доступ к клубу по специальным условиям</p>
-<form id="waitlistForm">
-<div class="form-field"><label>Имя</label><input type="text" name="name" required placeholder="Ваше имя"></div>
-<div class="form-field"><label>Электронная почта</label><input type="email" name="email" required placeholder="email@example.com"></div>
-<div class="form-field"><label>Номер телефона</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__"></div>
-<div class="form-field"><label>Ник в Telegram</label><input type="text" name="telegram" placeholder="@username" required></div>
-<div class="consent-item"><input type="checkbox" id="consentPdWait" required><label for="consentPdWait">Даю <a href="https://disk.yandex.ru/i/3RzYTim7hZO0Nw" target="_blank">согласие</a> на обработку персональных данных в соответствии с <a href="https://disk.yandex.ru/i/vIxEZ0HkXsj42Q" target="_blank">политикой</a> обработки ПД</label></div>
-<div class="consent-item"><input type="checkbox" id="consentMailWait" required><label for="consentMailWait">Даю согласие на получение рассылки (<a href="https://disk.yandex.ru/i/TpVA_h_RWP1UyQ" target="_blank">согласие на рассылку</a>)</label></div>
-<div class="modal-buttons"><button type="submit" class="btn">Отправить заявку</button></div>
-</form>
-</div>
+  <div class="modal-window">
+    <span class="close-modal close-waitlist">&times;</span>
+    <h3>Лист ожидания</h3>
+    <p>Заполните форму, чтобы первыми получить доступ к клубу по специальным условиям</p>
+    <form id="waitlistForm" action="#" method="post">
+      <div class="form-field">
+        <label>Имя</label>
+        <input type="text" name="name" required placeholder="Ваше имя">
+      </div>
+      <div class="form-field">
+        <label>Электронная почта</label>
+        <input type="email" name="email" required placeholder="email@example.com">
+      </div>
+      <div class="form-field">
+        <label>Номер телефона</label>
+        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__">
+      </div>
+      <div class="form-field">
+        <label>Ник в Telegram</label>
+        <input type="text" name="telegram" placeholder="@username" required>
+      </div>
+      <div class="consent-item">
+        <input type="checkbox" id="consentPdWait" required>
+        <label for="consentPdWait">Даю <a href="https://disk.yandex.ru/i/3RzYTim7hZO0Nw" target="_blank">согласие</a> на обработку персональных данных в соответствии с <a href="https://disk.yandex.ru/i/vIxEZ0HkXsj42Q" target="_blank">политикой</a> обработки ПД</label>
+      </div>
+      <div class="consent-item">
+        <input type="checkbox" id="consentMailWait" required>
+        <label for="consentMailWait">Даю согласие на получение рассылки (<a href="https://disk.yandex.ru/i/TpVA_h_RWP1UyQ" target="_blank">согласие на рассылку</a>)</label>
+      </div>
+      <div class="modal-buttons">
+        <button type="submit" class="btn btn-disabled" id="submitWaitlistBtn">Отправить заявку</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -515,6 +535,42 @@ openBtns.forEach(b=>b.addEventListener("click",e=>{e.preventDefault();waitlistMo
 closeWait?.addEventListener("click",()=>waitlistModal.classList.remove("active"));
 waitlistModal?.addEventListener("click",e=>{if(e.target===waitlistModal)waitlistModal.classList.remove("active")});
 document.getElementById("waitlistForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Спасибо! Ваша заявка принята. Мы свяжемся с вами.");e.target.reset();waitlistModal.classList.remove("active")});
+
+// Логика активации кнопки в форме листа ожидания
+const waitlistForm = document.getElementById('waitlistForm');
+const consentPd = document.getElementById('consentPdWait');
+const consentMail = document.getElementById('consentMailWait');
+const submitBtn = document.getElementById('submitWaitlistBtn');
+
+function updateWaitlistButtonState() {
+  const isPdChecked = consentPd.checked;
+  const isMailChecked = consentMail.checked;
+  if (isPdChecked && isMailChecked) {
+    submitBtn.classList.remove('btn-disabled');
+    submitBtn.classList.add('btn-enabled');
+  } else {
+    submitBtn.classList.remove('btn-enabled');
+    submitBtn.classList.add('btn-disabled');
+  }
+}
+
+if (consentPd && consentMail && submitBtn) {
+  consentPd.addEventListener('change', updateWaitlistButtonState);
+  consentMail.addEventListener('change', updateWaitlistButtonState);
+  // Запрещаем отправку, если кнопка неактивна
+  waitlistForm.addEventListener('submit', (e) => {
+    if (submitBtn.classList.contains('btn-disabled')) {
+      e.preventDefault();
+      alert('Пожалуйста, дайте согласие на обработку данных и на получение рассылки.');
+    } else {
+      // Здесь можно добавить реальную отправку на Albato (замените action формы)
+      // e.preventDefault(); // раскомментировать, если нужно обработать через fetch
+      // alert('Спасибо! Ваша заявка принята.');
+      // waitlistForm.reset();
+      // closeWaitlistModal();
+    }
+  });
+}
 </script>
 </body>
 </html>
