@@ -119,7 +119,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 }
 .benefit-card-new:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .benefit-icon-new{width:70px;height:70px;border-radius:20px;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.2rem}
-/* ШАХМАТНЫЙ ПОРЯДОК: первые три в первом ряду, четвёртый и пятый — во втором ряду, выровнены по центру */
 .benefits-grid-5 .benefit-card-new:nth-child(4){
   grid-column: 2 / 3;
 }
@@ -136,7 +135,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
   }
 }
 
-/* Наполнение клуба */
 .content-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:40px 0}
 .content-card{background:var(--warm-white);border-radius:var(--r);padding:32px 28px;text-align:center;border:1px solid var(--border);transition:var(--transition)}
 .content-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
@@ -145,7 +143,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .content-card p{font-size:.88rem;color:var(--text-mid);margin-bottom:0}
 @media (max-width:768px){.content-cards{grid-template-columns:1fr}}
 
-/* ---------- Общие секции ---------- */
 .how-it-works,.benefits,.club-features,.reviews,.faq{
   padding:80px 0;
   clear:both;
@@ -157,7 +154,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .reviews-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
 .reviews-count{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text-light)}
 
-/* Список "О клубе" */
 .about-club-list{
   list-style:none;
   text-align:left;
@@ -178,7 +174,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
   font-weight:600;
 }
 
-/* ---------- Слайдер отзывов (розовые, прозрачные стрелки) ---------- */
 .rev-track-wrap{position:relative}
 .rev-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 8px 28px 8px;scrollbar-width:none}
 .rev-track::-webkit-scrollbar{display:none}
@@ -232,7 +227,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
   border-radius:12px;
 }
 
-/* ---------- FAQ ---------- */
 .faq-inner{max-width:760px;margin:0 auto}
 .faq-item{margin-bottom:12px;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--warm-white)}
 .faq-question{padding:20px 28px;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;align-items:center}
@@ -245,7 +239,6 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .faq-answer-inner p{font-size:.95rem;line-height:1.7;margin:0}
 .faq-answer-inner a{color:var(--pink) !important;text-decoration:underline}
 
-/* ---------- Футер ---------- */
 footer{background:#2c2420;padding:60px 0 30px;clear:both}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
 .foot-brand .logo{color:rgba(255,255,255,.9) !important;margin-bottom:.8rem;display:block}
@@ -259,20 +252,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 .foot-bottom{padding-top:20px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .foot-bottom p{font-size:.75rem;color:rgba(255,255,255,.3);margin:0}
 
-/* ---------- Модальное окно (лист ожидания) ---------- */
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
-.modal-overlay.active{opacity:1;visibility:visible}
-.modal-window{background:var(--warm-white);border-radius:var(--r);max-width:480px;width:90%;padding:32px 28px;text-align:center;box-shadow:var(--shadow-lg);position:relative;transform:scale(0.9);transition:transform .3s}
-.modal-overlay.active .modal-window{transform:scale(1)}
-.modal-window h3{font-size:1.8rem;color:var(--pink);margin-bottom:1rem}
-.close-modal{position:absolute;top:16px;right:20px;font-size:28px;cursor:pointer}
-.consent-item{display:flex;align-items:flex-start;gap:12px;margin:16px 0;text-align:left;font-size:.85rem}
-.consent-item input{margin-top:2px;width:18px;height:18px}
-.consent-item a{color:var(--pink);text-decoration:underline}
-.form-field{margin-bottom:16px;text-align:left}
-.form-field input{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:white;font-family:inherit}
-
-/* ---------- Адаптив ---------- */
+/* Адаптивность (без модалок) */
 @media (max-width:1024px){
   .hero-inner{grid-template-columns:1fr;gap:48px}
   .hero-photo-col{max-width:480px;margin:0 auto}
@@ -293,7 +273,6 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
   .content-cards{grid-template-columns:1fr}
   .rev-nav{gap:12px}
   .rev-btn{width:40px;height:40px;font-size:1.2rem}
-  /* Кнопки на мобильных вертикально с увеличенным отступом */
   .hero .hero-actions{
     display: flex !important;
     flex-direction: column !important;
@@ -336,7 +315,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <li><a href=#content>Наполнение</a></li>
 <li><a href=#reviews>Отзывы</a></li>
 <li><a href=#faq>FAQ</a></li>
-<li><a href="#" class="btn open-waitlist" style=margin-left:8px>Лист ожидания</a></li>
+<li><a href="#" class="btn" id="waitlistBtn" style=margin-left:8px>Лист ожидания</a></li>
 </ul>
 </nav>
 <button class=mobile-btn id=mbtn aria-label=Меню>☰</button>
@@ -357,15 +336,14 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 Занимайте место в предзаписи, чтобы вступить на 3 поток клуба первыми и по самым выгодным условиям!
 </div>
 <div class="hero-actions reveal reveal-delay-3">
-<a href="#" class="btn open-waitlist">Заполнить предзапись</a>
+<a href="#" class="btn waitlist-btn">Заполнить предзапись</a>
 <a href="#about-club" class="btn btn-ghost">Узнать больше</a>
 </div>
 </div>
 <div class="hero-photo-col reveal">
 <div class=hero-photo-frame><img src="https://i.ibb.co/gsgvLcv/i-1.png" alt="Вера Малыгина"></div>
 <div class=hero-badge><div class=b-icon>🏆</div><div class=b-text><strong>4 000 участниц</strong><span>в клубе «Фабрика заготовок»</span></div></div>
-<!-- Замена текста: вместо "с 2025 года" пишем про открытие -->
-<div class="hero-tag">🗓️ Открытие клуба в середине сентября</div>
+<div class=hero-tag>🗓️ Открытие клуба в середине сентября</div>
 </div>
 </div>
 </div>
@@ -388,7 +366,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <li><span>✅</span> <span>Чат с участницами для обмена опытом</span></li>
 <li><span>🤫</span> <span>И многое НОВОЕ другое 🤫</span></li>
 </ul>
-<div class="benefits-cta" style="margin-top:30px"><a href="#" class="btn btn-primary open-waitlist">Заполняйте лист ожидания клуба, чтобы первыми получить ссылку на вступление!</a></div>
+<div class="benefits-cta" style="margin-top:30px"><a href="#" class="btn btn-primary waitlist-btn">Заполняйте лист ожидания клуба, чтобы первыми получить ссылку на вступление!</a></div>
 </div>
 </div>
 </section>
@@ -416,7 +394,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <div class="content-card reveal"><div class="content-icon">🎥</div><h3>Подробные видео-инструкции</h3><p>В видео показан не только процесс приготовления, но и оптимальный сценарий действий для экономии времени! Видео короткие, без воды.</p></div>
 <div class="content-card reveal"><div class="content-icon">📦</div><h3>Дополнительные полезные материалы</h3><p>Правила и лайфхаки заготовок, советы по составлению меню и продуктовой корзины, подборка инвентаря и многое другое!</p></div>
 </div>
-<div class="benefits-cta"><a href="#" class="btn open-waitlist">Оставить заявку на клуб</a></div>
+<div class="benefits-cta"><a href="#" class="btn waitlist-btn">Оставить заявку на клуб</a></div>
 </div>
 </section>
 
@@ -471,44 +449,6 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 </div>
 </footer>
 
-<!-- Модальное окно для предзаписи (лист ожидания) с блокировкой кнопки -->
-<div class="modal-overlay" id="waitlistModal">
-  <div class="modal-window">
-    <span class="close-modal close-waitlist">&times;</span>
-    <h3>Лист ожидания</h3>
-    <p>Заполните форму, чтобы первыми получить доступ к клубу по специальным условиям</p>
-    <form id="waitlistForm" action="https://h.albato.ru/wh/38/1lfd60b/DxxlnOQbEX7EHT8-Vk2RQSO_V2NEss8WolaDCaFgO6w/" method="post">
-      <div class="form-field">
-        <label>Имя</label>
-        <input type="text" name="name" required placeholder="Ваше имя">
-      </div>
-      <div class="form-field">
-        <label>Электронная почта</label>
-        <input type="email" name="email" required placeholder="email@example.com">
-      </div>
-      <div class="form-field">
-        <label>Номер телефона</label>
-        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__">
-      </div>
-      <div class="form-field">
-        <label>Ник в Telegram</label>
-        <input type="text" name="telegram" placeholder="@username" required>
-      </div>
-      <div class="consent-item">
-        <input type="checkbox" id="consentPdWait" required>
-        <label for="consentPdWait">Даю <a href="https://disk.yandex.ru/i/3RzYTim7hZO0Nw" target="_blank">согласие</a> на обработку персональных данных в соответствии с <a href="https://disk.yandex.ru/i/vIxEZ0HkXsj42Q" target="_blank">политикой</a> обработки ПД</label>
-      </div>
-      <div class="consent-item">
-        <input type="checkbox" id="consentMailWait" required>
-        <label for="consentMailWait">Даю согласие на получение рассылки (<a href="https://disk.yandex.ru/i/TpVA_h_RWP1UyQ" target="_blank">согласие на рассылку</a>)</label>
-      </div>
-      <div class="modal-buttons">
-        <button type="submit" class="btn btn-disabled" id="submitWaitlistBtn">Отправить заявку</button>
-      </div>
-    </form>
-  </div>
-</div>
-
 <script>
 // мобильное меню
 const mbtn=document.getElementById("mbtn"),nav=document.getElementById("nav");
@@ -529,48 +469,15 @@ function initDots(){if(!dotsWrap)return;dotsWrap.innerHTML="";const groups=Math.
 function updateDots(){if(!track||!dotsWrap||!slideStep)return;const idx=Math.round(track.scrollLeft/slideStep);dotsWrap.querySelectorAll(".rev-dot").forEach((d,i)=>{d.classList.toggle("active",i===idx)})}
 if(track){updateSlideStep();initDots();track.addEventListener("scroll",updateDots,{passive:true});document.getElementById("revPrev")?.addEventListener("click",()=>{if(slideStep)track.scrollBy({left:-slideStep,behavior:"smooth"})});document.getElementById("revNext")?.addEventListener("click",()=>{if(slideStep)track.scrollBy({left:slideStep,behavior:"smooth"})});window.addEventListener("load",()=>{updateSlideStep();updateDots()})}
 
-// лист ожидания
-const waitlistModal=document.getElementById("waitlistModal"),openBtns=document.querySelectorAll(".open-waitlist"),closeWait=document.querySelector(".close-waitlist");
-openBtns.forEach(b=>b.addEventListener("click",e=>{e.preventDefault();waitlistModal.classList.add("active")}));
-closeWait?.addEventListener("click",()=>waitlistModal.classList.remove("active"));
-waitlistModal?.addEventListener("click",e=>{if(e.target===waitlistModal)waitlistModal.classList.remove("active")});
-document.getElementById("waitlistForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Спасибо! Ваша заявка принята. Мы свяжемся с вами.");e.target.reset();waitlistModal.classList.remove("active")});
+// ВСЕ КНОПКИ СТА ВЕДУТ НА ЯНДЕКС ФОРМУ
+const FORM_URL = 'https://forms.yandex.ru/u/6a18210ee010db6f32b56b90'; // <<< ЗДЕСЬ ВСТАВЬТЕ ВАШУ ССЫЛКУ
 
-// Логика активации кнопки в форме листа ожидания
-const waitlistForm = document.getElementById('waitlistForm');
-const consentPd = document.getElementById('consentPdWait');
-const consentMail = document.getElementById('consentMailWait');
-const submitBtn = document.getElementById('submitWaitlistBtn');
-
-function updateWaitlistButtonState() {
-  const isPdChecked = consentPd.checked;
-  const isMailChecked = consentMail.checked;
-  if (isPdChecked && isMailChecked) {
-    submitBtn.classList.remove('btn-disabled');
-    submitBtn.classList.add('btn-enabled');
-  } else {
-    submitBtn.classList.remove('btn-enabled');
-    submitBtn.classList.add('btn-disabled');
-  }
-}
-
-if (consentPd && consentMail && submitBtn) {
-  consentPd.addEventListener('change', updateWaitlistButtonState);
-  consentMail.addEventListener('change', updateWaitlistButtonState);
-  // Запрещаем отправку, если кнопка неактивна
-  waitlistForm.addEventListener('submit', (e) => {
-    if (submitBtn.classList.contains('btn-disabled')) {
-      e.preventDefault();
-      alert('Пожалуйста, дайте согласие на обработку данных и на получение рассылки.');
-    } else {
-      // Здесь можно добавить реальную отправку на Albato (замените action формы)
-      // e.preventDefault(); // раскомментировать, если нужно обработать через fetch
-      // alert('Спасибо! Ваша заявка принята.');
-      // waitlistForm.reset();
-      // closeWaitlistModal();
-    }
+document.querySelectorAll('.waitlist-btn, .btn.waitlist-btn, a.btn.waitlist-btn, .btn.open-waitlist, #waitlistBtn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(FORM_URL, '_blank');
   });
-}
+});
 </script>
 </body>
 </html>
