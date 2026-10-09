@@ -86,22 +86,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .hero-badge{position:absolute;bottom:-16px;left:-16px;background:var(--warm-white);border-radius:18px;padding:14px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;z-index:2}
 .hero-badge .b-icon{width:44px;height:44px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
 .hero-badge .b-text strong{display:block;font-size:.95rem;color:var(--pink) !important}
-.hero-badge .b-text span{font-size:.72rem;color:var(--text-light)}
-.hero-tag{
-  position:absolute;
-  top:20px;
-  right:-16px;
-  background:var(--pink) !important;
-  color:#fdf3f3 !important;
-  border-radius:50px;
-  padding:9px 18px;
-  font-size:.78rem;
-  font-weight:700;
-  letter-spacing:.04em;
-  box-shadow:0 8px 24px rgba(212,118,138,.4);
-  z-index:2;
-  white-space:nowrap;
-}
+.hero-tag{position:absolute;top:20px;right:-16px;background:var(--pink) !important;color:#fdf3f3 !important;border-radius:50px;padding:9px 18px;font-size:.78rem;font-weight:700;box-shadow:0 8px 24px rgba(212,118,138,.4);white-space:nowrap}
 
 /* ---------- Карточки результатов (шахматный порядок 3+2) ---------- */
 .benefits-grid-5{
@@ -135,6 +120,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
   }
 }
 
+/* Наполнение клуба */
 .content-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:40px 0}
 .content-card{background:var(--warm-white);border-radius:var(--r);padding:32px 28px;text-align:center;border:1px solid var(--border);transition:var(--transition)}
 .content-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
@@ -143,6 +129,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .content-card p{font-size:.88rem;color:var(--text-mid);margin-bottom:0}
 @media (max-width:768px){.content-cards{grid-template-columns:1fr}}
 
+/* ---------- Общие секции ---------- */
 .how-it-works,.benefits,.club-features,.reviews,.faq{
   padding:80px 0;
   clear:both;
@@ -154,6 +141,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .reviews-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
 .reviews-count{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text-light)}
 
+/* Список "О клубе" */
 .about-club-list{
   list-style:none;
   text-align:left;
@@ -174,6 +162,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
   font-weight:600;
 }
 
+/* ---------- Слайдер отзывов (розовые, прозрачные стрелки) ---------- */
 .rev-track-wrap{position:relative}
 .rev-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 8px 28px 8px;scrollbar-width:none}
 .rev-track::-webkit-scrollbar{display:none}
@@ -227,6 +216,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
   border-radius:12px;
 }
 
+/* ---------- FAQ ---------- */
 .faq-inner{max-width:760px;margin:0 auto}
 .faq-item{margin-bottom:12px;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--warm-white)}
 .faq-question{padding:20px 28px;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;align-items:center}
@@ -239,6 +229,7 @@ nav ul li .btn{padding:8px 20px;font-size:.85rem}
 .faq-answer-inner p{font-size:.95rem;line-height:1.7;margin:0}
 .faq-answer-inner a{color:var(--pink) !important;text-decoration:underline}
 
+/* ---------- Футер ---------- */
 footer{background:#2c2420;padding:60px 0 30px;clear:both}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
 .foot-brand .logo{color:rgba(255,255,255,.9) !important;margin-bottom:.8rem;display:block}
@@ -252,7 +243,20 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 .foot-bottom{padding-top:20px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .foot-bottom p{font-size:.75rem;color:rgba(255,255,255,.3);margin:0}
 
-/* Адаптивность (без модалок) */
+/* ---------- Модальное окно ---------- */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal-window{background:var(--warm-white);border-radius:var(--r);max-width:480px;width:90%;padding:32px 28px;text-align:center;box-shadow:var(--shadow-lg);position:relative;transform:scale(0.9);transition:transform .3s}
+.modal-overlay.active .modal-window{transform:scale(1)}
+.modal-window h3{font-size:1.8rem;color:var(--pink);margin-bottom:1rem}
+.close-modal{position:absolute;top:16px;right:20px;font-size:28px;cursor:pointer}
+.consent-item{display:flex;align-items:flex-start;gap:12px;margin:16px 0;text-align:left;font-size:.85rem}
+.consent-item input{margin-top:2px;width:18px;height:18px}
+.consent-item a{color:var(--pink);text-decoration:underline}
+.form-field{margin-bottom:16px;text-align:left}
+.form-field input{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:white;font-family:inherit}
+
+/* ---------- Адаптив ---------- */
 @media (max-width:1024px){
   .hero-inner{grid-template-columns:1fr;gap:48px}
   .hero-photo-col{max-width:480px;margin:0 auto}
@@ -273,29 +277,6 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
   .content-cards{grid-template-columns:1fr}
   .rev-nav{gap:12px}
   .rev-btn{width:40px;height:40px;font-size:1.2rem}
-  .hero .hero-actions{
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 24px !important;
-    margin-bottom: 24px !important;
-  }
-  .hero .hero-actions .btn{
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-    padding: 14px 20px !important;
-    box-sizing: border-box;
-  }
-  .hero-tag{
-    white-space: normal;
-    text-align: center;
-    max-width: 150px;
-    font-size: 0.7rem;
-    padding: 6px 12px;
-    top: 10px;
-    right: 10px;
-  }
 }
 @media (max-width:576px){
   h1{font-size:2.2rem}
@@ -315,7 +296,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <li><a href=#content>Наполнение</a></li>
 <li><a href=#reviews>Отзывы</a></li>
 <li><a href=#faq>FAQ</a></li>
-<li><a href="#" class="btn" id="waitlistBtn" style=margin-left:8px>Лист ожидания</a></li>
+<li><a href="#" class="btn open-opening" style=margin-left:8px>Открытие 12 октября</a></li>
 </ul>
 </nav>
 <button class=mobile-btn id=mbtn aria-label=Меню>☰</button>
@@ -333,16 +314,16 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <h1 class="hero-title reveal reveal-delay-1">Клуб <span>Фабрика заготовок</span></h1>
 <p class="hero-sub reveal reveal-delay-1">Фабрика заготовок — кулинарный клуб конструктор, который поможет вам экономить время и деньги, но при этом — питаться сбалансированно и разнообразно!</p>
 <div class="hero-highlight reveal reveal-delay-2" style="margin-top:20px">
-Занимайте место в предзаписи, чтобы вступить на 3 поток клуба первыми и по самым выгодным условиям!
+🎉 <span>Клуб откроется 12 октября</span> — следите за новостями!
 </div>
 <div class="hero-actions reveal reveal-delay-3">
-<a href="#" class="btn waitlist-btn">Заполнить предзапись</a>
-<a href="#about-club" class="btn btn-ghost">Узнать больше</a>
+<a href="#about-club" class="btn">Узнать больше</a>
 </div>
 </div>
 <div class="hero-photo-col reveal">
 <div class=hero-photo-frame><img src="https://i.ibb.co/gsgvLcv/i-1.png" alt="Вера Малыгина"></div>
 <div class=hero-badge><div class=b-icon>🏆</div><div class=b-text><strong>4 000 участниц</strong><span>в клубе «Фабрика заготовок»</span></div></div>
+<div class=hero-tag>с 2025 года</div>
 </div>
 </div>
 </div>
@@ -365,7 +346,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <li><span>✅</span> <span>Чат с участницами для обмена опытом</span></li>
 <li><span>🤫</span> <span>И многое НОВОЕ другое 🤫</span></li>
 </ul>
-<div class="benefits-cta" style="margin-top:30px"><a href="#" class="btn btn-primary waitlist-btn">Заполняйте лист ожидания клуба, чтобы первыми получить ссылку на вступление!</a></div>
+<div class="benefits-cta" style="margin-top:30px"><a href="#" class="btn btn-primary open-opening">🎉 Клуб откроется 12 октября</a></div>
 </div>
 </div>
 </section>
@@ -376,7 +357,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <div class="section-header reveal"><span class=label>Преимущества</span><h2>Результаты после вступления в клуб</h2></div>
 <div class="benefits-grid-5">
 <div class="benefit-card-new reveal"><div class="benefit-icon-new">⏰</div><h3>Экономия до 10 часов в неделю</h3><p>Вы сможете экономить 2-3 часа ЕЖЕДНЕВНО на закупке, готовке и уборке после! Благодаря системе заготовок приготовление блюд будет занимать по 10-20 минут!</p></div>
-<div class="benefit-card-new reveal"><div class="benefit-icon-new">💰</div><h3>Экономия до 40% бюджета в месяц</h3><p>С четким планом, грамотными закупками, безотходной готовкой, мы не тратим лишнего и не выбрасываем продукты! <strong>Более 200 тысяч за год я сохранила в семейном бюджете без экономии на качестве!</strong></p></div>
+<div class="benefit-card-new reveal"><div class="benefit-icon-new">💰</div><h3>Экономия до 40% бюджета в месяц</h3><p>С четким планом, грамотными закупками, безотходной готовкой, мы не тратим лишнего и не выбрасываем продукты! Более 200 тысяч за год сохранено в семейном бюджете.</p></div>
 <div class="benefit-card-new reveal"><div class="benefit-icon-new">🥗</div><h3>Разнообразный рацион</h3><p>Вы сможете соединять заготовки, как конструктор, получая разные блюда из похожих ингредиентов из вашей морозилки! Один набор заготовок, а блюда всегда разные</p></div>
 <div class="benefit-card-new reveal"><div class="benefit-icon-new">🌿</div><h3>Здоровое питание без ограничений и диет</h3><p>Вы начнете есть овощи, добирать белок и делать свою тарелку более полезной, а состав блюд чище! Система заготовок поможет добиться ваших целей в похудении или наборе веса.</p></div>
 <div class="benefit-card-new reveal"><div class="benefit-icon-new">🍲</div><h3>Быт без квеста «что приготовить?»</h3><p>В морозилке всегда есть заготовки, которые можно собрать за 5 минут по методу «конструктор» и получить сбалансированное блюдо.</p></div>
@@ -393,7 +374,7 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <div class="content-card reveal"><div class="content-icon">🎥</div><h3>Подробные видео-инструкции</h3><p>В видео показан не только процесс приготовления, но и оптимальный сценарий действий для экономии времени! Видео короткие, без воды.</p></div>
 <div class="content-card reveal"><div class="content-icon">📦</div><h3>Дополнительные полезные материалы</h3><p>Правила и лайфхаки заготовок, советы по составлению меню и продуктовой корзины, подборка инвентаря и многое другое!</p></div>
 </div>
-<div class="benefits-cta"><a href="#" class="btn waitlist-btn">Оставить заявку на клуб</a></div>
+<div class="benefits-cta"><a href="#" class="btn open-opening">🎉 Клуб откроется 12 октября</a></div>
 </div>
 </section>
 
@@ -442,11 +423,27 @@ footer{background:#2c2420;padding:60px 0 30px;clear:both}
 <div class=foot-brand><a href=#hero class=logo>Фабрика <span>Заготовок</span></a><p style=margin-top:.8rem>Кулинарный клуб Веры Малыгиной — система заготовок для удобного, вкусного и здорового питания.</p></div>
 <div class=foot-col><h4>Информация</h4><ul><li>ИП Малыгина Вера Николаевна</li><li><a href=https://disk.yandex.ru/i/sDY8_G_OsyiZ8g target=_blank>Реквизиты</a></li></ul></div>
 <div class=foot-col><h4>Документы</h4><ul><li><a href=https://disk.yandex.ru/i/TpVA_h_RWP1UyQ target=_blank>Согласие на рассылку</a></li><li><a href=https://disk.yandex.ru/i/3RzYTim7hZO0Nw target=_blank>Согласие на обработку ПД</a></li><li><a href=https://disk.yandex.ru/i/vIxEZ0HkXsj42Q target=_blank>Политика обработки ПД</a></li></ul></div>
-<div class=foot-col><h4>Контакты</h4><ul><li><a href=https://t.me/+ces7gQS4YXA0NmUy target=_blank>Telegram</a></li><li><a href=https://vk.ru/im/channels/-234363549 target=_blank>ВКонтакте</a></li><li><a href=https://max.ru/vera_mlgn_fabrika target=_blank>MAX</a></li><li><a href="https://dzen.ru/zagotovki_veramlgn?share_to=link" target=_blank>Яндекс Дзен</a></li><li>Служба заботы: zabotaveramlgn@yandex.ru</li></ul></div>
+<div class=foot-col><h4>Контакты</h4><ul><li><a href=https://t.me/vera_mlgn_fabrika target=_blank>Telegram</a></li><li><a href=https://max.ru/vera_mlgn_fabrika target=_blank>MAX</a></li><li><a href="https://dzen.ru/zagotovki_veramlgn?share_to=link" target=_blank>Яндекс Дзен</a></li><li>Служба заботы: zabotaveramlgn@yandex.ru</li></ul></div>
 </div>
 <div class=foot-bottom><p>© 2025 Фабрика Заготовок. Все права защищены.</p><div class=foot-social></div></div>
 </div>
 </footer>
+
+<!-- Модальное окно уведомления об открытии -->
+<div class="modal-overlay" id="openingModal">
+<div class="modal-window">
+<span class="close-modal close-opening">&times;</span>
+<h3>🎉 Клуб откроется 12 октября</h3>
+<p>Следите за нашими соцсетями, чтобы не пропустить открытие!</p>
+<div style="margin-top:24px;text-align:center">
+<p style="font-size:1.1rem;font-weight:600;color:var(--pink);margin-bottom:20px">Подписывайтесь:</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+<a href="https://t.me/vera_mlgn_fabrika" target="_blank" class="btn btn-ghost" style="padding:12px 24px"><i class="fab fa-telegram"></i> Telegram</a>
+<a href="https://max.ru/vera_mlgn_fabrika" target="_blank" class="btn btn-ghost" style="padding:12px 24px"><i class="fas fa-comment-dots"></i> MAX</a>
+</div>
+</div>
+</div>
+</div>
 
 <script>
 // мобильное меню
@@ -468,15 +465,11 @@ function initDots(){if(!dotsWrap)return;dotsWrap.innerHTML="";const groups=Math.
 function updateDots(){if(!track||!dotsWrap||!slideStep)return;const idx=Math.round(track.scrollLeft/slideStep);dotsWrap.querySelectorAll(".rev-dot").forEach((d,i)=>{d.classList.toggle("active",i===idx)})}
 if(track){updateSlideStep();initDots();track.addEventListener("scroll",updateDots,{passive:true});document.getElementById("revPrev")?.addEventListener("click",()=>{if(slideStep)track.scrollBy({left:-slideStep,behavior:"smooth"})});document.getElementById("revNext")?.addEventListener("click",()=>{if(slideStep)track.scrollBy({left:slideStep,behavior:"smooth"})});window.addEventListener("load",()=>{updateSlideStep();updateDots()})}
 
-// ВСЕ КНОПКИ СТА ВЕДУТ НА ЯНДЕКС ФОРМУ
-const FORM_URL = 'https://forms.yandex.ru/u/6a18210ee010db6f32b56b90'; // <<< ЗДЕСЬ ВСТАВЬТЕ ВАШУ ССЫЛКУ
-
-document.querySelectorAll('.waitlist-btn, .btn.waitlist-btn, a.btn.waitlist-btn, .btn.open-waitlist, #waitlistBtn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open(FORM_URL, '_blank');
-  });
-});
+// уведомление об открытии
+const openingModal=document.getElementById("openingModal"),openBtns=document.querySelectorAll(".open-opening"),closeOpening=document.querySelector(".close-opening");
+openBtns.forEach(b=>b.addEventListener("click",e=>{e.preventDefault();openingModal.classList.add("active")}));
+closeOpening?.addEventListener("click",()=>openingModal.classList.remove("active"));
+openingModal?.addEventListener("click",e=>{if(e.target===openingModal)openingModal.classList.remove("active")});
 </script>
 </body>
 </html>
